@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Prompter {
-    private Jar mJar;
+    Jar mJar = new Jar();
 
     public void setJar(Jar jar) {
         mJar = jar;
@@ -38,33 +38,33 @@ public class Prompter {
     }
 
     public void isWinner() {
-        int guess;
+        int guess = 0;
         int tries = 0;
-        int over = 0;
 
         do {
-            System.out.print("\nGuess:  ");
-            guess = input.nextInt();
+            try {
+                System.out.print("\nGuess:  ");
+                guess = input.nextInt();
 
-            if (guess > mJar.getMaxItems()) {
+                if (guess > mJar.getMaxItems()) {
+                    throw new IllegalArgumentException();
+                }
+                else if (guess < mJar.getAnswer()) {
+                    System.out.println("Your guess is too low.  Try again.");
+                }
+                else if (guess > mJar.getAnswer()) {
+                    System.out.println("Your guess is too high.  Try again.");
+                }
+            } catch (IllegalArgumentException iae){
                 System.out.println("Your guess must be less than " + mJar.getMaxItems() + ".");
-                over++;
-            } else if (guess < mJar.getAnswer()) {
-                System.out.println("Your guess is too low.  Try again.");
-            } else if (guess > mJar.getAnswer()) {
-                System.out.println("Your guess is too high.  Try again.");
+                tries--;
             }
             tries++;
-
-            if ((tries-over) > 1) {
-                System.out.println((tries - over) + " attempts.");
-            } else {
-                System.out.println((tries - over) + " attempt.");
-            }
+            System.out.println(tries + " attempts.");
 
         } while (guess != mJar.getAnswer());
 
         System.out.println("\nCongratulations - you guessed that there are " + mJar.getAnswer() + " "
-                + mJar.getItemName() + " in the jar!  It took you " + (tries-over) + " guess(es) to get it right.");
+                + mJar.getItemName() + " in the jar!  It took you " + tries + " guess(es) to get it right.");
     }
 }
