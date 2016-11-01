@@ -47,7 +47,7 @@ public class Prompter {
                 guess = input.nextInt();
 
                 if (guess > mJar.getMaxItems()) {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException("Your guess must be less than " + mJar.getMaxItems() + ".");
                 }
                 else if (guess < mJar.getAnswer()) {
                     System.out.println("Your guess is too low.  Try again.");
@@ -56,7 +56,7 @@ public class Prompter {
                     System.out.println("Your guess is too high.  Try again.");
                 }
             } catch (IllegalArgumentException iae){
-                System.out.println("Your guess must be less than " + mJar.getMaxItems() + ".");
+                System.out.println(iae.getMessage());
                 tries--;
             }
             tries++;
