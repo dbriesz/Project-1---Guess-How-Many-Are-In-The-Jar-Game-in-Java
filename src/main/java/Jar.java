@@ -6,38 +6,16 @@ public class Jar {
     private int mMaxNum;
     private int mAnswer;
 
-    public Jar() {
-        mItemName = "";
-        mMaxNum = 0;
-    }
-
     public Jar(String itemName, int maxNum) {
         mItemName = itemName;
         mMaxNum = maxNum;
-    }
-
-    public void fillJar() {
         Random random = new Random();
-        mAnswer = 1 + random.nextInt(getMaxItems());
+        mAnswer = 1 + random.nextInt(mMaxNum);
     }
 
-    public void setItemName(String itemName) {
-        mItemName = itemName;
-    }
+    public String getItemName() { return mItemName; }
 
-    public void setMaxNum(int maxNum) {
-        mMaxNum = maxNum;
-    }
+    public int getMaxItems() { return mMaxNum; }
 
-    public String getItemName() {
-        return mItemName;
-    }
-
-    public int getMaxItems() {
-        return mMaxNum;
-    }
-
-    public int getAnswer() {
-        return mAnswer;
-    }
+    public int getAnswer() { return mAnswer; }
 }

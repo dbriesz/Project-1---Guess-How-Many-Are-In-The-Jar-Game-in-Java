@@ -1,35 +1,29 @@
 import java.util.Scanner;
 
 public class Prompter {
-    Jar mJar = new Jar();
 
-    public void setJar(Jar jar) {
-        mJar = jar;
+    private Scanner input;
+    private Jar mJar;
+
+    public Prompter() {
+        input = new Scanner(System.in);
     }
 
-    Scanner input = new Scanner(System.in);
-
-    private String itemName;
-    private int maxItems;
-
     public void play() {
-        promptForItemName();
-        mJar.setItemName(itemName);
-        promptForMaxItems();
-        mJar.setMaxNum(maxItems);
+        String itemName = promptForItemName();
+        int maxItems = promptForMaxItems(itemName);
+        mJar = new Jar(itemName, maxItems);
         promptForGuess();
     }
 
     public String promptForItemName() {
         System.out.print("What type of item?  ");
-        itemName = input.nextLine();
-        return itemName;
+        return input.nextLine();
     }
 
-    public int promptForMaxItems() {
+    public int promptForMaxItems(String itemName) {
         System.out.print("What is the maximum amount of " + itemName + "?  ");
-        maxItems = input.nextInt();
-        return maxItems;
+        return input.nextInt();
     }
 
     public void promptForGuess() {
